@@ -929,6 +929,11 @@ func (d *Decimal) UnmarshalJSON(decimalBytes []byte) error {
 	return nil
 }
 
+func (d *Decimal) UnmarshalBSON(decimalBytes []byte) error {
+	return d.UnmarshalBinary(decimalBytes)
+}
+
+
 // MarshalJSON implements the json.Marshaler interface.
 func (d Decimal) MarshalJSON() ([]byte, error) {
 	var str string
@@ -940,6 +945,9 @@ func (d Decimal) MarshalJSON() ([]byte, error) {
 	return []byte(str), nil
 }
 
+func (d Decimal) MarshalBSON() ([]byte, error) {
+	return d.MarshalBinary()
+}
 // UnmarshalBinary implements the encoding.BinaryUnmarshaler interface. As a string representation
 // is already used when encoding to text, this method stores that string as []byte
 func (d *Decimal) UnmarshalBinary(data []byte) error {
